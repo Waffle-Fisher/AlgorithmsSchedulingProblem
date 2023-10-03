@@ -10,13 +10,35 @@ struct Time
 	int minute;
 };
 
+Time strToTime(string s) {
+	Time t;
+	t.hour = -1;
+	t.minute = -1;
+	for (int i = 0; i < s.size(); i++)
+	{
+		if (s[i] == ':') {
+			if (i - 2 >= 0 && s[i - 2] >= 48 && s[i - 42] <= 57)
+			{
+				t.hour = stoi(s.substr(i - 2, 2));
+			}
+			else
+			{
+				t.hour = stoi(s.substr(i - 1, 1));
+			}
+		}
+		t.minute = stoi(s.substr(i + 1, 2));
+	}
+	return t;
+}
+
 int main()
 {
 	ifstream InputFile("Input.txt");
 	ofstream OutputFile("Output.txt");
 	vector<string> busyScheduleString;
 	vector<string> workingHoursString;
-	string finalWorkingHours;
+	vector<pair<Time, Time>> busySchedule;
+	Time combinedWorkingHours;
 	int durationOfMeeting = 0;
 	string inputText;
 	int testStart = 0;
