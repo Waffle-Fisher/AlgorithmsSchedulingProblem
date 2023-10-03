@@ -4,16 +4,24 @@
 #include <string>
 using namespace std;
 
+struct Time
+{
+	int hour;
+	int minute;
+};
+
 int main()
 {
 	ifstream InputFile("Input.txt");
+	ofstream OutputFile("Output.txt");
 	vector<string> busyScheduleString;
 	vector<string> workingHoursString;
 	string finalWorkingHours;
 	int durationOfMeeting = 0;
 	string inputText;
+	int testStart = 0;
 
-	for (int i = 0; i < 5; i++)
+	for(int i = testStart; i < testStart + 5; i++)
 	{
 		getline(InputFile, inputText);
 		if (i == 0 || i == 2) { busyScheduleString.push_back(inputText); }
@@ -21,7 +29,20 @@ int main()
 		if (i == 4) { durationOfMeeting = stoi(inputText); }
 	}
 
-	if
+
+	for (int i = 0; i < busyScheduleString.size(); i++)
+	{
+		OutputFile << busyScheduleString[i];
+	}
+	OutputFile << "\n";
+	for (int i = 0; i < workingHoursString.size(); i++)
+	{
+		OutputFile << workingHoursString[i];
+	}
+	testStart += 5;
+
+	InputFile.close();
+	OutputFile.close();
 }
 
 // Read file
